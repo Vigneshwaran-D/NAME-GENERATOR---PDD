@@ -1,0 +1,42 @@
+Error: Newtonsoft.Json.JsonSerializationException: Error converting value "Modern" to type 'UiPath.Project.ProjectData.ProjectProfile'. Path 'designOptions.projectProfile', line 22, position 30.
+ ---> System.ArgumentException: Requested value 'Modern' was not found.
+   at Newtonsoft.Json.Utilities.EnumUtils.ParseEnum(Type enumType, NamingStrategy namingStrategy, String value, Boolean disallowNumber)
+   at Newtonsoft.Json.Converters.StringEnumConverter.ReadJson(JsonReader reader, Type objectType, Object existingValue, JsonSerializer serializer)
+   --- End of inner exception stack trace ---
+   at Newtonsoft.Json.Converters.StringEnumConverter.ReadJson(JsonReader reader, Type objectType, Object existingValue, JsonSerializer serializer)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.DeserializeConvertable(JsonConverter converter, JsonReader reader, Type objectType, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.Linq.JToken.ToObject(Type objectType, JsonSerializer jsonSerializer)
+   at Newtonsoft.Json.Linq.JToken.ToObject(Type objectType)
+   at Newtonsoft.Json.Linq.JToken.ToObject[T]()
+   at UiPath.Project.ProjectData.WorkflowDataUpgrade.<>c.<.ctor>b__3_0(JObject projectJson)
+   at UiPath.Project.ProjectData.WorkflowDataUpgrade.GetLatestProjectData(String projectContent)
+   at UiPath.Project.WorkflowProjectRepository.<>c__DisplayClass10_0.<Read>b__0()
+   at System.Threading.Tasks.Task`1.InnerInvoke()
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at UiPath.Project.WorkflowProjectRepository.Read(String path, Dictionary`2 availablePackages)
+   at UiPath.Studio.Plugin.Workflow.Project.ProjectJsonReader.ReadAsync(String path)
+   at UiPath.Studio.Core.Services.PersistableServiceBase`3.GetFactoryByPath(String path)
+   at UiPath.Studio.Core.Services.PersistableServiceBase`3.ResolveFactory(OpenInformation openInfo)
+   at UiPath.Studio.Core.Services.PersistableServiceBase`3.OpenAsync(OpenInformation openInfo)
+   at UiPath.Studio.Core.CommonServices.ProjectServiceBase.OpenAsync(OpenInformation openInfo)
+   at UiPath.Studio.Core.CommonServices.OpenCloseCommandsService.OpenProjectInternal(OpenInformation openInfo)
+   at UiPath.Studio.Core.CommonServices.OpenCloseCommandsService.OpenProjectAsync(OpenInformation openInfo, Boolean shouldCloseSolution)
+   at UiPath.Studio.Core.CommonServices.OpenCloseCommandsService.OpenFileExecuteAsync(String initialDirectory, IOpenOptions options)
+   at UiPath.Studio.Shell.ViewModels.MainWindowViewModel.<>c__DisplayClass353_0.<<OpenAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at UiPath.Studio.Shell.ViewModels.StartPageViewModel.ExecuteCommandAsync(Func`1 commandExecute)
+   at UiPath.Studio.Shell.ViewModels.MainWindowViewModel.OpenAsync(Object argument), HResult -2146233088

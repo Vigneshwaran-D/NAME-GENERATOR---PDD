@@ -1,0 +1,45 @@
+<Activity x:Class="ProcessTransaction" ...>
+  <Sequence DisplayName="Process Single Row">
+    <RetryScope Reason="SystemException" RepeatOnException="True" NumberOfRetriesInCaseOfException="Config.Retry_Attempts" RetryIntervalMilliseconds="Config.Retry_Delay_ms">
+      <Try>
+        <OpenBrowser Url="FNG_URL" BrowserType="Chrome" Private="True" DisplayName="Open FNG Site">
+          <Body>
+            <!-- Slide age and gender -->
+            <InvokeJS Code="moveSlider(\"ageSlider\", Config.Age_Min, Config.Age_Max)"/>
+            <InvokeJS Code="setGender(\"genderSlider\", row("Gender").ToString())"/>
+            <Click Selector="//button[@id='gen']"/>
+            <ElementExists Selector="//div[@class='profile']" Result="exists" Timeout="00:00:20"/>
+          </Body>
+        </OpenBrowser>
+        <!-- Extract fields -->
+        <GetText Selector="//span[@id='first']" Result="firstname"/>
+        <GetText Selector="//span[@id='last']" Result="lastnameFull"/>
+        <Assign>
+          <To>lastname</To><Value>Regex.Match(lastnameFull, "^\w+").Value</Value>
+        </Assign>
+        <GetText Selector="//a[contains(@href,'mailto:')]" Result="emailRaw"/>
+        <Assign>
+          <To>email</To><Value>emailRaw.Replace("mailto:","")</Value>
+        </Assign>
+        <GetText Selector="//li[contains(.,'Age')]/span" Result="ageRaw"/>
+        <Assign>
+          <To>age</To><Value>CInt(Regex.Match(ageRaw, "\d+").Value)</Value>
+        </Assign>
+        <GetText Selector="//li[contains(.,'Birthday')]/span" Result="birthdayRaw"/>
+        <Assign>
+          <To>birthday</To><Value>DateTime.Parse(birthdayRaw).ToString("yyyy-MM-dd")</Value>
+        </Assign>
+        <Assign>
+          <To>company</To><Value>CultureInfo.CurrentCulture.TextInfo.ToTitleCase(email.Split("@"c)(1).Split("."c)(0))</Value>
+        </Assign>
+        <!-- Add to dtOutput -->
+        <AddDataRow DataTable="dtOutput" ArrayRow="New Object(){firstname, lastname, email, age, birthday, company}"/>
+        <CloseTab/>
+      </Try>
+      <Catch x:TypeArguments="System.Exception">
+        <InvokeWorkflow FileName="ExceptionHandler.xaml" Arguments="new Dictionary(of string, object){{"ex", exception}}"/>
+        <Rethrow/>
+      </Catch>
+    </RetryScope>
+  </Sequence>
+</Activity>

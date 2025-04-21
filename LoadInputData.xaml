@@ -1,0 +1,21 @@
+<Activity x:Class="LoadInputData" ...>
+  <Sequence DisplayName="Load Input CSV">
+    <TryCatch>
+      <Try>
+        <ReadCSV FilePath="in_Config.Input_File_Path" Result="dtInput"/>
+        <!-- Validate required columns -->
+        <If Condition="Not dtInput.Columns.Contains("Gender") Or Not dtInput.Columns.Contains("Count")">
+          <Then>
+            <Throw Exception="New BusinessException("Missing required 'Gender' or 'Count' column")" />
+          </Then>
+        </If>
+      </Try>
+      <Catch>
+        <Catch x:TypeArguments="System.Exception">
+          <InvokeWorkflowWorkflow FileName="ExceptionHandler.xaml" Arguments="new Dictionary(of string, object){{"ex", exception}}"/>
+          <Rethrow />
+        </Catch>
+      </Catch>
+    </TryCatch>
+  </Sequence>
+</Activity>

@@ -1,0 +1,19 @@
+<Activity x:Class="ExceptionHandler" ...>
+  <Sequence DisplayName="Handle Exceptions">
+    <GetEnvironmentVariable VariableName="TransactionID" Result="txnId"/>
+    <Assign>
+      <To>logMsg</To>
+      <Value>$"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Txn {txnId}: {ex.Message}"</Value>
+    </Assign>
+    <AppendLine FilePath="Logs\ExecutionLog.txt" Text="logMsg"/>
+    <TakeScreenshot Result="img"/>
+    <SaveImage FilePath="Logs\Screenshots\{txnId}_{DateTime.Now:HHmmss}.png" InputImage="img"/>
+    <!-- Send Email -->
+    <Send SMTPServer="Config.SMTP_Server" Port="Config.SMTP_Port" From="Config.Notification_Email" To="Config.Notification_Email" Subject="Error in NameGenerator" Body="logMsg">
+      <Attachments>
+        <Attachment Path="Logs\ExecutionLog.txt" />
+        <Attachment Path="Logs\Screenshots\{txnId}_{DateTime.Now:HHmmss}.png" />
+      </Attachments>
+    </Send>
+  </Sequence>
+</Activity>

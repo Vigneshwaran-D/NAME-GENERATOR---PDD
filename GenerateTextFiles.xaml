@@ -1,0 +1,33 @@
+<Activity x:Class="GenerateTextFiles" ...>
+  <Sequence DisplayName="Generate .txt Files">
+    <!-- Sample row -->
+    <Assign>
+      <To>sample</To><Value>dtOutput.Rows(0)</Value>
+    </Assign>
+    <WriteTextFile FilePath="TextFiles\" & sample("Firstname") & "_" & sample("Lastname") & ".txt"
+                   Text="Name: " & sample("Firstname") & " " & sample("Lastname") & vbCrLf & _
+                          "Email: " & sample("Email") & vbCrLf & _
+                          "Birthday: " & sample("Birthday") />
+    <!-- Youngest & Oldest -->
+    <Assign>
+      <To>youngestRow</To><Value>dtOutput.AsEnumerable().OrderBy(Function(r) CInt(r("Age"))).First()</Value>
+    </Assign>
+    <Assign>
+      <To>oldestRow</To><Value>dtOutput.AsEnumerable().OrderByDescending(Function(r) CInt(r("Age"))).First()</Value>
+    </Assign>
+    <!-- Loop both -->
+    <ForEach x:TypeArguments="System.Data.DataRow" Values="{youngestRow, oldestRow}" CurrentIndex="idx" CurrentItem="row">
+      <WriteTextFile FilePath="TextFiles\" & row("Firstname") & "_" & row("Lastname") & ".txt"
+                     Text="Name: " & row("Firstname") & " " & row("Lastname") & vbCrLf & _
+                            "Email: " & row("Email") & vbCrLf & _
+                            "Birthday: " & row("Birthday") & vbCrLf & _
+                            "Data Generated: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") />
+      <InvokeMethod MethodName="Start" TargetType="System.Diagnostics.Process">
+        <Parameters>
+          <Parameter Value="notepad.exe"/>
+          <Parameter Value="TextFiles\" & row("Firstname") & "_" & row("Lastname") & ".txt"/>
+        </Parameters>
+      </InvokeMethod>
+    </ForEach>
+  </Sequence>
+</Activity>

@@ -1,0 +1,23 @@
+<Activity mc:Ignorable="..." x:Class="InitAllSettings" ...>
+  <Sequence DisplayName="Init Settings">
+    <!-- Read Config.xlsx into Dictionary asset -->
+    <ExcelApplicationScope FilePath="Settings\Config.xlsx">
+      <ReadRange SheetName="Config" Result="dtConfig"/>    
+    </ExcelApplicationScope>
+    <!-- Assign asset values to arguments/variables -->
+    <Assign>
+      <To>FNG_URL</To><Value>dtConfig.Select("Key='FNG_URL'")[0]("Value").ToString()</Value>
+    </Assign>
+    <!-- Create folders if they don't exist -->
+    <If Condition="Not Directory.Exists(OutputFolder)">
+      <Then>
+        <InvokeMethod MethodName="CreateDirectory" TargetType="System.IO.Directory">
+          <Parameters>
+            <Parameter Value="OutputFolder"/>
+          </Parameters>
+        </InvokeMethod>
+      </Then>
+    </If>
+    <!-- Configure SMTP settings similarly -->
+  </Sequence>
+</Activity>

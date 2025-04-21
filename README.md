@@ -1,7 +1,7 @@
 # Create a detailed README.md file with more explanation, visuals, and section headers
 
 detailed_readme = """
-# 💼 UiPath RPA Project: Fake Name Generator Automation
+# 💼 UiPath RPA Project: Name Generator Automation
 
 This UiPath project automates the process of generating fake identities from [FakeNameGenerator.com](https://www.fakenamegenerator.com/) using gender preferences and configuration settings provided in a CSV input file.
 
@@ -108,22 +108,3 @@ NameGeneratorProject/ ├── Main.xaml # Main entry workflow ├── InitAl
 - Modify `GenerateTextFiles.xaml` for other output formats
 
 ---
-
-## 📜 License
-
-MIT License. Feel free to use, modify, and distribute.
-
----
-
-## 🙋 Need Help?
-
-Contact the project author or raise an issue via your project Git repository.
-"""
-
-# Save to a file
-detailed_readme_path = "/mnt/data/README_DETAILED_NameGeneratorProject.md"
-with open(detailed_readme_path, "w") as f:
-    f.write(detailed_readme.strip())
-
-detailed_readme_path
-

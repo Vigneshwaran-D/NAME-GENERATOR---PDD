@@ -1,5 +1,5 @@
-Error: Newtonsoft.Json.JsonSerializationException: Error converting value "Modern" to type 'UiPath.Project.ProjectData.ProjectProfile'. Path 'designOptions.projectProfile', line 22, position 30.
- ---> System.ArgumentException: Requested value 'Modern' was not found.
+Error: Newtonsoft.Json.JsonSerializationException: Error converting value "Legacy" to type 'UiPath.Project.ProjectData.ProjectProfile'. Path 'designOptions.projectProfile', line 22, position 30.
+ ---> System.ArgumentException: Requested value 'Legacy' was not found.
    at Newtonsoft.Json.Utilities.EnumUtils.ParseEnum(Type enumType, NamingStrategy namingStrategy, String value, Boolean disallowNumber)
    at Newtonsoft.Json.Converters.StringEnumConverter.ReadJson(JsonReader reader, Type objectType, Object existingValue, JsonSerializer serializer)
    --- End of inner exception stack trace ---

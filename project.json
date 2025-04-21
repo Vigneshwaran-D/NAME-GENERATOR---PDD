@@ -19,7 +19,7 @@
     "executionType": "Workflow"
   },
   "designOptions": {
-    "projectProfile": "Modern",
+    "projectProfile": "Legacy",
     "outputType": "Process",
     "libraryOptions": {
       "includeOriginalXaml": false,

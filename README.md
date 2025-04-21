@@ -1,6 +1,3 @@
-# Create a detailed README.md file with more explanation, visuals, and section headers
-
-detailed_readme = """
 # 💼 UiPath RPA Project: Name Generator Automation
 
 This UiPath project automates the process of generating fake identities from [FakeNameGenerator.com](https://www.fakenamegenerator.com/) using gender preferences and configuration settings provided in a CSV input file.

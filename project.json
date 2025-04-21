@@ -1,11 +1,38 @@
 {
-    "projectName": "NameGeneratorProject",
-    "description": "Generates names via fakenamegenerator.com",
-    "main": "Main.xaml",
-    "dependencies": {
-      "UiPath.System.Activities": "23.10.0",
-      "UiPath.UIAutomation.Activities": "23.10.5",
-      "UiPath.Mail.Activities": "1.10.5",
-      "UiPathTeam.Utility.Activities": "1.0.0"
+  "name": "NameGeneratorProject",
+  "description": "Generates names via fakenamegenerator.com",
+  "main": "Main.xaml",
+  "dependencies": {
+    "UiPath.System.Activities": "[23.10.0]",
+    "UiPath.UIAutomation.Activities": "[23.10.5]",
+    "UiPath.Mail.Activities": "[1.10.5]"
+  },
+  "schemaVersion": "4.0",
+  "studioVersion": "23.10.0",
+  "projectType": "Process",
+  "runtimeOptions": {
+    "autoDispose": true,
+    "isPausable": false,
+    "requiresUserInteraction": true,
+    "supportsPersistence": false,
+    "excludedLoggedData": [],
+    "executionType": "Workflow"
+  },
+  "designOptions": {
+    "projectProfile": "Modern",
+    "outputType": "Process",
+    "libraryOptions": {
+      "includeOriginalXaml": false,
+      "privateWorkflows": []
     }
-  }
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "b3e8e458-6b35-4c16-a290-56f58e460000",
+      "input": [],
+      "output": []
+    }
+  ]
+}
